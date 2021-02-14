@@ -10,6 +10,7 @@ namespace WarCardGame.Models
             this.SetCards();
             this.ShuffleCards();
         }
+        
 
         //  <summary>
         //  Pops Card Stack to return drawn Card
@@ -49,6 +50,16 @@ namespace WarCardGame.Models
                 }
             }
             Cards = new Stack<Card>(newCards);
+        }
+
+
+        //  <summary>
+        //  -Sets Cards property to the value of the Cards property of the PlayedDeck parameter
+        //  </summary>
+        // <param name="PlayedDeck"> <see cref="PlayedDeck"/>Instance of the PlayedDeck class of cards already played and won through play</param>
+        //  <returns>None</returns>
+        public void SetCards(PlayedDeck PlayedDeck) {
+            base.SetCards(PlayedDeck.Cards);
         }
     }
 }

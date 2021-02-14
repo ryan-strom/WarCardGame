@@ -6,6 +6,7 @@ namespace WarCardGame.Models
         public PlayedDeck(){
             this.Cards = new Stack<Card>();
         }
+
         //  <summary>
         //  -Adds card to Cards property
         //  </summary>
