@@ -2,7 +2,7 @@ namespace WarCardGame.Models
 {
     public class Player
     {
-        public Deck PlayingDeck { get; set; }
-        public Deck PlayedDeck { get; set; }
+        public PlayingDeck PlayingDeck { get; set; }
+        public PlayedDeck PlayedDeck { get; set; }
     }
 }
