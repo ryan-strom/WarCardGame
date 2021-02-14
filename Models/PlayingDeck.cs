@@ -20,6 +20,18 @@ namespace WarCardGame.Models
             return Cards.Pop();
         }
         //  <summary>
+        //  Pops Card Stack to return drawn Card
+        //  </summary>
+        // <param name="count"> <see cref="Int32"/> Number of cards to draw</param>
+        //  <returns>A list of the <see cref="Card"/> cards representing the cards that are drawn</returns>
+        public List<Card> DrawCard(int count){ 
+            List<Card> drawnCards = new List<Card>();
+            for(int i = 0; i<count; i++){
+                drawnCards.Add(Cards.Pop());
+            }
+            return drawnCards;
+        }
+        //  <summary>
         //  -Initializes the Cards property to be a colleciton with a length of the amount of Suits given times the amount of cards per Suit
         //  -Adds each card of each suit to cards property
         //  </summary>

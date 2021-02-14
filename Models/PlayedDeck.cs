@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace WarCardGame.Models
 {
     public class PlayedDeck : Deck
@@ -10,6 +11,17 @@ namespace WarCardGame.Models
         // <returns>None</returns>
         public void AddCard(Card Card) {  
            Cards.Push(Card);
+        }
+
+        //  <summary>
+        //  -Add list of Cards to Cards property
+        //  </summary>
+        // <param name="CardsToAdd">List of Card class to add to Cards</param>
+        // <returns>None</returns>
+        public void AddCard(List<Card> CardsToAdd) {  
+            foreach(var card in CardsToAdd){
+                Cards.Push(card);
+            }
         }
     }
 }
