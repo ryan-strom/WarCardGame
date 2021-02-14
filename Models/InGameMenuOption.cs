@@ -5,6 +5,7 @@ namespace WarCardGame.Models
         Save,
         SaveAndQuit,
         QuitProgram,
+        BackToMainMenu,
         CloseMenu
     }
 }

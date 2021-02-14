@@ -11,14 +11,16 @@ namespace WarCardGame.Models
         protected InGameMenu InGameMenu;
         private readonly string DrawAgainPrompt = "Draw card (y/n)? Type menu for more options. ";
         private readonly int DrawStakesCount = 3;
+        public bool ShouldQuit {get; set; }
         public Game(){
             InGameMenu = new InGameMenu(this);
+            ShouldQuit = false;
         }
         public Game(Player user, Player computer) 
         {
             this.User = user;
             this.Computer = computer;
-               
+            this.ShouldQuit = false;
         }
         public Game(string PlayerName){
             PlayingDeck gameDeck = new PlayingDeck(true);
@@ -27,12 +29,14 @@ namespace WarCardGame.Models
             this.Computer = new Player("Computer", playingDecks[1]);
             this.RoundHistory = new List<Round>();
             this.InGameMenu = new InGameMenu(this);
+            this.ShouldQuit = false;
         }
         public Game(Player User, Player Computer, List<Round> RoundHistory){
             this.User = User;
             this.Computer = Computer;
             this.RoundHistory = RoundHistory;
             this.InGameMenu = new InGameMenu(this);
+            this.ShouldQuit = false;
         }
 
 
@@ -44,9 +48,12 @@ namespace WarCardGame.Models
         public void Play(){
             Console.Write(DrawAgainPrompt);
             string input = Console.ReadLine();
-            while(User.PlayingDeck.Cards.Any() && Computer.PlayingDeck.Cards.Any() &&  input != "n"){
+            while(User.PlayingDeck.Cards.Any() && Computer.PlayingDeck.Cards.Any() &&  input != "n" && ShouldQuit == false){
                 if(input == "menu"){
                     InGameMenu.Menu();
+                }
+                if(ShouldQuit){
+                    break;
                 }
                 if(input == "y"){
                     StartRound();

@@ -37,18 +37,43 @@ namespace WarCardGame.Models
             InGameMenuOption selectedOption = GetSelectedOption();
             while(new InGameMenuOption[]{ InGameMenuOption.CloseMenu }.Contains(selectedOption) == false){
                 if(selectedOption == InGameMenuOption.Save){
-                    SerializationUtility<Game> serializer = new SerializationUtility<Game>("Game");
-                    serializer.Serialize(this.Game, string.Format("{0}_{1}", this.Game.User.Name, DateTime.Now.ToString("f")));
+                    Save();
+                }
+                if(selectedOption == InGameMenuOption.SaveAndQuit){
+                    Save();
+                    Quit();
                 }
                 if(selectedOption == InGameMenuOption.QuitProgram){
-                    Console.WriteLine("Are you sure you want to exit? Type yes if you do. ");
-                    string input = Console.ReadLine();
-                    if(input.ToLower() == "yes"){
-                        Environment.Exit(0);
-                    }
+                    Quit();
+                }
+                if(selectedOption == InGameMenuOption.BackToMainMenu){
+                    Game.ShouldQuit = true;
+                    break;
                 }
                 PresentOptions();
                 selectedOption = GetSelectedOption();
+            }
+        }
+         //  <summary>
+        //  Serializes instance of Game property
+        //  </summary>
+        //  <param>None/param>
+        //  <returns>None</returns>
+        public void Save(){
+            SerializationUtility<Game> serializer = new SerializationUtility<Game>("Game");
+            serializer.Serialize(this.Game, string.Format("{0}_{1}", this.Game.User.Name, DateTime.Now.ToString("f")));
+
+        } 
+        //  <summary>
+        //  Exits entire application
+        //  </summary>
+        //  <param>None/param>
+        //  <returns>None</returns>
+        public void Quit(){
+            Console.WriteLine("Are you sure you want to exit? Type yes if you do. ");
+            string input = Console.ReadLine();
+            if(input.ToLower() == "yes"){
+                Environment.Exit(0);
             }
         }
        //  <summary>
@@ -64,7 +89,8 @@ namespace WarCardGame.Models
             Console.WriteLine("1) Save current game");
             Console.WriteLine("2) Save current game and quit");
             Console.WriteLine("3) Exit program");
-            Console.WriteLine("4) Close this menu and go back to game");
+            Console.WriteLine("4) Go back to main menu");
+            Console.WriteLine("5) Close this menu and go back to game");
             Console.WriteLine("------------------------------------");
             Console.WriteLine("");
         }
