@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Linq;
 namespace WarCardGame.Models
 {
     public class Game
@@ -46,8 +47,14 @@ namespace WarCardGame.Models
             cardStakes.Add(UserCard);
             cardStakes.Add(ComputerCard);
             if(UserCard == ComputerCard){
+                Console.WriteLine("It is a tie! Drawing {0} cards from each players' deck.");
                 List<Card> userCardStakes = User.PlayingDeck.DrawCard(DrawStakesCount);
                 List<Card> computerCardStakes = Computer.PlayingDeck.DrawCard(DrawStakesCount);
+                Console.WriteLine("These cards are at stake: ");
+                Console.WriteLine("Drawn from user deck: ");
+                userCardStakes.ForEach(card => Console.WriteLine(card.Name));
+                Console.WriteLine("Drawn from computer deck: ");
+                computerCardStakes.ForEach(card => Console.WriteLine(card.Name));
                 cardStakes.AddRange(userCardStakes);
                 cardStakes.AddRange(computerCardStakes);
                 DrawRound drawRound = new DrawRound(UserCard, ComputerCard, userCardStakes, computerCardStakes);
@@ -55,9 +62,13 @@ namespace WarCardGame.Models
                 PlayRound(User.PlayingDeck.DrawCard(), Computer.PlayingDeck.DrawCard(), cardStakes);
             }
             if(UserCard > ComputerCard){
+                Console.WriteLine("User wins! These cards were added to user's played deck: ");
+                cardStakes.ForEach(card => Console.WriteLine(card.Name));
                 User.PlayedDeck.AddCard(cardStakes);
             }
             if(UserCard < ComputerCard){
+                Console.WriteLine("Computer wins! These cards were added to computer's played deck: ");
+                cardStakes.ForEach(card => Console.WriteLine(card.Name));
                 Computer.PlayedDeck.AddCard(cardStakes);
             }
             
