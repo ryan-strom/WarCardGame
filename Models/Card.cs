@@ -4,18 +4,19 @@ namespace WarCardGame.Models
     public class Card
     {
         public Suit Suit { get; private set; }
-        public string Name { get; private set; }
+        public string Face { get; private set; }
         public int Value { get; private set; } 
-
+        public string Name { get; }
         public Card(Suit Suit, int Value){
             this.Suit = Suit;
             this.Value = Value;
             if(Value == 1){
                 this.Value = 14;
             }
+            this.Face = this.GetCardFace();
             this.Name = this.GetCardName();
         }
-        private string GetCardName(){
+        protected string GetCardFace(){
             if(Value == 11){
                 return "Jack";
             }
@@ -32,6 +33,9 @@ namespace WarCardGame.Models
                 return "Joker";
             }
             return Value.ToString();
+        }
+        protected string GetCardName(){
+            return string.Format("{0} of {1}", Face, Suit);
         }
         public static Boolean operator <(Card lhs, Card rhs) {
             if(lhs.Value < rhs.Value){

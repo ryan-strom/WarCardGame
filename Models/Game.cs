@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 namespace WarCardGame.Models
 {
     public class Game
@@ -16,6 +17,8 @@ namespace WarCardGame.Models
         public void StartRound(){
             Card userCard = User.PlayingDeck.DrawCard();
             Card computerCard = Computer.PlayingDeck.DrawCard();
+            Console.WriteLine("Computer draws {0}", computerCard.Name);
+            Console.WriteLine("Player draws {0}", computerCard.Name);
             PlayRound(userCard, computerCard, new List<Card>());
         }
 
