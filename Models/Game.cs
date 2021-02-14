@@ -21,31 +21,32 @@ namespace WarCardGame.Models
 
         //  <summary>
         //  Represents steps in playing round by drawing player cards and comparing them. If they are equal, the method is called recursive and additional drawn cards
-        //  are added ExistingCardStakes parameter. If they are not equal, then the played cards and card stakes are added to the winning player's played decks. 
+        //  are added to the ExistingCardStakes parameter by passing the local cardStakes variable. The local cardStakes variable is a concatenation of
+        //  the played cards, existing card stakes, and the new card stakes. If they playing cards are not equal, then the played cards and card stakes 
+        //  are added to the winning player's played decks. 
         //  </summary>
         //  <param name="UserCard">The user's drawn card, an instance of the <see cref="Card"/>Card class </param>
         //  <param name="ComputerCard">The computer's drawn card, an instance of the <see cref="Card"/>Card class </param>
         //  <param name="ExistingCardStakes">A List of the <see cref="Card"/>Card class that represents all the exisiting cards to be won by the winning player in the tieing rounds</param>
         //  <returns>None</returns>
         public void PlayRound(Card UserCard, Card ComputerCard, List<Card> ExistingCardStakes){
-            List<Card> cardStakes = new List<Card>(){
-                UserCard,
-                ComputerCard
-            };
+            List<Card> cardStakes = ExistingCardStakes;
+            cardStakes.Add(UserCard);
+            cardStakes.Add(ComputerCard);
             if(UserCard == ComputerCard){
                 List<Card> userCardStakes = User.PlayingDeck.DrawCard(DrawStakesCount);
                 List<Card> computerCardStakes = Computer.PlayingDeck.DrawCard(DrawStakesCount);
-                ExistingCardStakes.AddRange(userCardStakes);
-                ExistingCardStakes.AddRange(computerCardStakes);
+                cardStakes.AddRange(userCardStakes);
+                cardStakes.AddRange(computerCardStakes);
                 DrawRound drawRound = new DrawRound(UserCard, ComputerCard, userCardStakes, computerCardStakes);
                 RoundHistory.Add(drawRound);
-                PlayRound(User.PlayingDeck.DrawCard(), Computer.PlayingDeck.DrawCard(), ExistingCardStakes);
+                PlayRound(User.PlayingDeck.DrawCard(), Computer.PlayingDeck.DrawCard(), cardStakes);
             }
             if(UserCard > ComputerCard){
-                User.PlayedDeck.AddCard(ExistingCardStakes);
+                User.PlayedDeck.AddCard(cardStakes);
             }
             if(UserCard < ComputerCard){
-                Computer.PlayedDeck.AddCard(ExistingCardStakes);
+                Computer.PlayedDeck.AddCard(cardStakes);
             }
             
         }
