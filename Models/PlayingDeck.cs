@@ -16,9 +16,13 @@ namespace WarCardGame.Models
         //  Pops Card Stack to return drawn Card
         //  </summary>
         //  <param>None</param>
-        //  <returns>An instance of the <see cref="Card"/> class representing the card that was drawn</returns>
+        //  <returns>An instance of the <see cref="Card"/> class representing the card that was drawn. Returns null if the stack is empty.</returns>
         public Card DrawCard(){ 
-            return Cards.Pop();
+            Card card = null;
+            if(Cards.TryPop(out card)){
+                return card;
+            }
+            return null;
         }
         //  <summary>
         //  Pops Card Stack to return drawn Card
@@ -27,7 +31,7 @@ namespace WarCardGame.Models
         //  <returns>A list of the <see cref="Card"/> cards representing the cards that are drawn</returns>
         public List<Card> DrawCard(int count){ 
             List<Card> drawnCards = new List<Card>();
-            for(int i = 0; i<count; i++){
+            for(int i = 0; i<count && i < Cards.Count; i++){
                 drawnCards.Add(Cards.Pop());
             }
             return drawnCards;

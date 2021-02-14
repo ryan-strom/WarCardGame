@@ -22,11 +22,13 @@ namespace WarCardGame.Models
 
         //  <summary>
         //  -Sets Cards property to the value of the Cards parameter 
+        //  -Empties Cards parameter
         //  </summary>
         // <param name="Cards">Stack of Card <see cref="Card"/> instance to set Cards property to</param>
         //  <returns>None</returns>
         protected void SetCards(Stack<Card> Cards){
             this.Cards = Cards;
+            Cards = new Stack<Card>();
         }
 
     }

@@ -9,7 +9,7 @@ namespace WarCardGame
         static void Main(string[] args)
         {
             Game game = new Game();
-            game.StartRound();
+            game.Play();
         }
     }
 }
