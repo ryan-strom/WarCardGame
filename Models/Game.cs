@@ -8,6 +8,11 @@ namespace WarCardGame.Models
         public Player Computer { get; set; }
         public List<Round> RoundHistory { get; set; }
         private readonly int DrawStakesCount = 3;
+        public Game(Player User, Player Computer, List<Round> RoundHistory){
+            this.User = User;
+            this.Computer = Computer;
+            this.RoundHistory = RoundHistory;
+        }
 
         //  <summary>
         //  Draws player cards and calls the PlayRound method to determine winner and the results of the win
