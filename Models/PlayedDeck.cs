@@ -1,9 +1,14 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 namespace WarCardGame.Models
 {
     public class PlayedDeck : Deck
     {
-        public PlayedDeck(){
+        [JsonConstructor]
+        private PlayedDeck(){
+
+        }
+        public PlayedDeck(bool InitializeCards=true){
             this.Cards = new Stack<Card>();
         }
 

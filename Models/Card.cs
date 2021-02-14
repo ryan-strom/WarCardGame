@@ -1,12 +1,18 @@
 using System;
+
+using Newtonsoft.Json;
 namespace WarCardGame.Models
 {
     public class Card
     {
-        public Suit Suit { get; private set; }
-        public string Face { get; private set; }
-        public int Value { get; private set; } 
-        public string Name { get; }
+        public Suit Suit { get; set; }
+        public string Face { get; set; }
+        public int Value { get; set; } 
+        public string Name { get; set; }
+        [JsonConstructor]
+        private Card(){
+
+        }
         public Card(Suit Suit, int Value){
             this.Suit = Suit;
             this.Value = Value;

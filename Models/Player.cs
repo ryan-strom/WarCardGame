@@ -1,16 +1,21 @@
 using System;
 using System.Linq;
+using Newtonsoft.Json;
 namespace WarCardGame.Models
 {
     public class Player
     {
         public string Name { get; set; }
-        public PlayingDeck PlayingDeck { get; }
-        public PlayedDeck PlayedDeck { get; }
+        public PlayingDeck PlayingDeck { get; set; }
+        public PlayedDeck PlayedDeck { get; set; }
+        [JsonConstructor]
+        private Player(){
+
+        }
         public Player(string Name, PlayingDeck PlayingDeck){
             this.Name = Name;
             this.PlayingDeck = PlayingDeck;
-            this.PlayedDeck = new PlayedDeck();
+            this.PlayedDeck = new PlayedDeck(true);
         }
 
         public Player(string Name, PlayingDeck PlayingDeck, PlayedDeck PlayedDeck){

@@ -4,7 +4,10 @@ namespace WarCardGame.Models
 {
     public class InGameMenu : Menu<InGameMenuOption>
     {
-
+        private Game Game { get; set; }
+        public InGameMenu(Game Game){
+            this.Game = Game;
+        }
         //  <summary>
         //  Validates and retrieves user selection from options
         //  </summary>
@@ -33,6 +36,10 @@ namespace WarCardGame.Models
             PresentOptions();
             InGameMenuOption selectedOption = GetSelectedOption();
             while(new InGameMenuOption[]{ InGameMenuOption.CloseMenu }.Contains(selectedOption) == false){
+                if(selectedOption == InGameMenuOption.Save){
+                    SerializationUtility<Game> serializer = new SerializationUtility<Game>("Game");
+                    serializer.Serialize(this.Game, string.Format("{0}_{1}", this.Game.User.Name, DateTime.Now.ToString("f")));
+                }
                 if(selectedOption == InGameMenuOption.QuitProgram){
                     Console.WriteLine("Are you sure you want to exit? Type yes if you do. ");
                     string input = Console.ReadLine();

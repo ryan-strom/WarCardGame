@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "NraZnCoKEkijStv3YW+cqpuOVyqstqxLGWmNXd0d4UH1Xh81Iim72Fwev4jJJ89wMZztHKYtSgc4yA1/FegEtQ==",
+  "dgSpecHash": "u03zqVaydzZxUku3jjyImae+b04Ih45t5aGWzmPlKQKcA2KDrBce/60kcf6qxv4WMpOjnFNK8FD3bLIXQHLJ0Q==",
   "success": true,
   "projectFilePath": "/Users/ryan/Projects/WarCardGame/WarCardGame/WarCardGame.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/ryan/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

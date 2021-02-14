@@ -11,19 +11,28 @@ namespace WarCardGame.Models
         protected InGameMenu InGameMenu;
         private readonly string DrawAgainPrompt = "Draw card (y/n)? Type menu for more options. ";
         private readonly int DrawStakesCount = 3;
+        public Game(){
+            InGameMenu = new InGameMenu(this);
+        }
+        public Game(Player user, Player computer) 
+        {
+            this.User = user;
+            this.Computer = computer;
+               
+        }
         public Game(string PlayerName){
-            PlayingDeck gameDeck = new PlayingDeck();
+            PlayingDeck gameDeck = new PlayingDeck(true);
             List<PlayingDeck> playingDecks = gameDeck.SplitDeck(2);
             this.User = new Player(PlayerName, playingDecks[0]);
             this.Computer = new Player("Computer", playingDecks[1]);
             this.RoundHistory = new List<Round>();
-            this.InGameMenu = new InGameMenu();
+            this.InGameMenu = new InGameMenu(this);
         }
         public Game(Player User, Player Computer, List<Round> RoundHistory){
             this.User = User;
             this.Computer = Computer;
             this.RoundHistory = RoundHistory;
-            this.InGameMenu = new InGameMenu();
+            this.InGameMenu = new InGameMenu(this);
         }
 
 
@@ -121,7 +130,7 @@ namespace WarCardGame.Models
                 UserCard = User.PlayingDeck.DrawCard();
                 ComputerCard = Computer.PlayingDeck.DrawCard();
                 Console.WriteLine("Computer draws {0}", ComputerCard.Name);
-                Console.WriteLine("Player draws {0}", UserCard.Name);
+                Console.WriteLine("{0} draws {1}", User.Name, UserCard.Name);
 
             }
 
@@ -138,7 +147,5 @@ namespace WarCardGame.Models
             
         }
 
-        p
-        
     }
 }

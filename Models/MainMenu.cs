@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 namespace WarCardGame.Models
 {
     public class MainMenu : Menu<MainMenuOption>
@@ -50,6 +52,52 @@ namespace WarCardGame.Models
                     Console.WriteLine("Hello {0}, let's get started!", playerName);
                     Game game = new Game(playerName);
                     game.Play();
+                }
+                if(selectedOption == MainMenuOption.LoadGame){
+                    SerializationUtility<Game> serializer = new SerializationUtility<Game>("Game");
+                    List<string> files = serializer.GetFiles();
+                    if(files.Any()){
+                        
+                        Console.WriteLine("");
+                        for(int i = 0; i<files.Count; i++){
+                            Console.WriteLine(string.Format("{0}) {1}", i+1, files[i]));
+                        }
+                        Console.WriteLine("");
+                        Console.Write("Select labeled number of file to load or type 'q' to go back: ");
+                        string input = Console.ReadLine();
+                        if(input == "q"){
+                            break;
+                        }
+                        int selectedIndex;
+                        while(Int32.TryParse(input, out selectedIndex) == false || selectedIndex > files.Count || selectedIndex <= 0){
+                            Console.WriteLine("Invalid selection");
+                            Console.WriteLine("Select labeled number of file to load or type 'q' to go back. ");
+                            input = Console.ReadLine();
+                            if(input == "q"){
+                                break;
+                            }
+                        }
+                        if(input != "q"){
+                            Game Game = serializer.Deserialize(files[selectedIndex-1]);
+                            Console.WriteLine("Let's refresh your memory..");
+                            foreach(Round round in Game.RoundHistory){
+                                Console.Write(string.Format("{0} drew {1}. {2} drew {3}. ", Game.User.Name, round.UserCard.Name, Game.Computer.Name, round.ComputerCard.Name));
+                                if(round.UserCard < round.ComputerCard){
+                                    Console.WriteLine("{0} won.", Game.Computer.Name);
+                                }
+                                if(round.UserCard > round.ComputerCard){
+                                    Console.WriteLine("{0} won.", Game.User.Name);
+                                }
+                                if(round.UserCard == round.ComputerCard){
+                                    Console.WriteLine("Tie.");
+                                }
+                            }
+                            Game.Play();
+                        }
+                    }
+                    else{
+                        Console.WriteLine("No saved files");
+                    }
                 }
                 PresentOptions();
                 selectedOption = GetSelectedOption();

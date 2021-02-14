@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Newtonsoft.Json;
 
 namespace WarCardGame.Models
 {
@@ -9,6 +9,7 @@ namespace WarCardGame.Models
     {
         public Stack<Card> Cards { get; set; }
         protected readonly int CardCountPerSuit = 13;
+    
     
         //  <summary>
         //  -Randomizes the order of the Cards property
