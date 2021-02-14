@@ -3,7 +3,9 @@ namespace WarCardGame.Models
 {
     public class PlayedDeck : Deck
     {
-        
+        public PlayedDeck(){
+            this.Cards = new Stack<Card>();
+        }
         //  <summary>
         //  -Adds card to Cards property
         //  </summary>

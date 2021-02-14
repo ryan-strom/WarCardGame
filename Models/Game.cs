@@ -10,6 +10,7 @@ namespace WarCardGame.Models
         private readonly int DrawStakesCount = 3;
         public Game(){
             this.User = new Player();
+            this.Computer = new Player();
         }
         public Game(Player User, Player Computer, List<Round> RoundHistory){
             this.User = User;
@@ -26,7 +27,7 @@ namespace WarCardGame.Models
             Card userCard = User.PlayingDeck.DrawCard();
             Card computerCard = Computer.PlayingDeck.DrawCard();
             Console.WriteLine("Computer draws {0}", computerCard.Name);
-            Console.WriteLine("Player draws {0}", computerCard.Name);
+            Console.WriteLine("Player draws {0}", userCard.Name);
             PlayRound(userCard, computerCard, new List<Card>());
         }
 
