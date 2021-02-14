@@ -7,7 +7,7 @@ namespace WarCardGame.Models
 {
     public class Deck
     {
-        public List<Card> Cards { get; set; }
+        public Stack<Card> Cards { get; set; }
         private readonly int CardCountPerSuit = 13;
         public Deck(){
             this.SetCards();
@@ -21,7 +21,7 @@ namespace WarCardGame.Models
         //  <returns>None</returns>
         public void ShuffleCards() {  
             Random random = new Random();  
-            Cards = Cards.OrderBy(card => random.Next()).ToList();
+            Cards = new Stack<Card>(Cards.OrderBy(card => random.Next()));
         }
 
         //  <summary>
@@ -41,7 +41,7 @@ namespace WarCardGame.Models
                     newCards[ind] =  new Card((Suit)i, j+1);
                 }
             }
-            Cards = newCards.ToList();
+            Cards = new Stack<Card>(newCards);
         }
     }
 }
