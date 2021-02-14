@@ -8,18 +8,22 @@ namespace WarCardGame.Models
         public Player User { get; set; }
         public Player Computer { get; set; }
         public List<Round> RoundHistory { get; set; }
+        protected InGameMenu InGameMenu;
+        private readonly string DrawAgainPrompt = "Draw card (y/n)? Type menu for more options. ";
         private readonly int DrawStakesCount = 3;
-        public Game(){
+        public Game(string PlayerName){
             PlayingDeck gameDeck = new PlayingDeck();
             List<PlayingDeck> playingDecks = gameDeck.SplitDeck(2);
-            this.User = new Player("User", playingDecks[0]);
+            this.User = new Player(PlayerName, playingDecks[0]);
             this.Computer = new Player("Computer", playingDecks[1]);
             this.RoundHistory = new List<Round>();
+            this.InGameMenu = new InGameMenu();
         }
         public Game(Player User, Player Computer, List<Round> RoundHistory){
             this.User = User;
             this.Computer = Computer;
             this.RoundHistory = RoundHistory;
+            this.InGameMenu = new InGameMenu();
         }
 
 
@@ -29,12 +33,17 @@ namespace WarCardGame.Models
         //  <param>None</param>
         //  <returns>None</returns>
         public void Play(){
-            Console.WriteLine("Draw card (y/n)? ");
-            string input = "y";
-            while(User.PlayingDeck.Cards.Any() && Computer.PlayingDeck.Cards.Any() &&  input == "y"){
-                StartRound();
-                Console.WriteLine("Draw card (y/n)? ");
-                input = "y";
+            Console.Write(DrawAgainPrompt);
+            string input = Console.ReadLine();
+            while(User.PlayingDeck.Cards.Any() && Computer.PlayingDeck.Cards.Any() &&  input != "n"){
+                if(input == "menu"){
+                    InGameMenu.Menu();
+                }
+                if(input == "y"){
+                    StartRound();
+                }
+                Console.Write(DrawAgainPrompt);
+                input = Console.ReadLine();
             }
             if(User.BothDecksEmpty()){
                 Console.WriteLine("{0} has no more cards. {1} wins!", User.Name, Computer.Name);
@@ -53,7 +62,7 @@ namespace WarCardGame.Models
         public void StartRound(){
             Card userCard = User.PlayingDeck.DrawCard();
             Card computerCard = Computer.PlayingDeck.DrawCard();
-            Console.WriteLine("Player draws {0}", userCard.Name);
+            Console.WriteLine("{0} draws {1}", User.Name, userCard.Name);
             Console.WriteLine("Computer draws {0}", computerCard.Name);
             PlayRound(userCard, computerCard);
 
@@ -95,9 +104,9 @@ namespace WarCardGame.Models
                     computerCardStakes.Add(drawnCard);
                 }
                 Console.WriteLine("These cards are at stake: ");
-                Console.WriteLine("\tDrawn from user deck: ");
+                Console.WriteLine("\tDrawn from {0}'s deck: ", User.Name);
                 userCardStakes.ForEach(card => Console.WriteLine("\t\t{0}", card.Name));
-                Console.WriteLine("\tDrawn from computer deck: ");
+                Console.WriteLine("\tDrawn from computer's deck: ");
                 computerCardStakes.ForEach(card => Console.WriteLine("\t\t{0}", card.Name));
                 cardStakes.AddRange(userCardStakes);
                 cardStakes.AddRange(computerCardStakes);
@@ -119,7 +128,7 @@ namespace WarCardGame.Models
             RoundHistory.Add(new Round(UserCard, ComputerCard));
             if(UserCard > ComputerCard){
                 User.PlayedDeck.AddCard(cardStakes);
-                Console.WriteLine("User wins! These cards were added to user's played deck: ");
+                Console.WriteLine("{0} wins! These cards were added to {0}'s played deck: ", User.Name);
             }
             if(UserCard < ComputerCard){
                 Computer.PlayedDeck.AddCard(cardStakes);
@@ -129,6 +138,7 @@ namespace WarCardGame.Models
             
         }
 
+        p
         
     }
 }

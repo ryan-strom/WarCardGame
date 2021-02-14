@@ -8,8 +8,9 @@ namespace WarCardGame
     {
         static void Main(string[] args)
         {
-            Game game = new Game();
-            game.Play();
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Menu();
+        
         }
     }
 }
