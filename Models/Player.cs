@@ -4,5 +4,9 @@ namespace WarCardGame.Models
     {
         public PlayingDeck PlayingDeck { get; set; }
         public PlayedDeck PlayedDeck { get; set; }
+        public Player(){
+            this.PlayingDeck = new PlayingDeck();
+            this.PlayedDeck = new PlayedDeck();
+        }
     }
 }
