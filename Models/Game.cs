@@ -8,6 +8,9 @@ namespace WarCardGame.Models
         public Player Computer { get; set; }
         public List<Round> RoundHistory { get; set; }
         private readonly int DrawStakesCount = 3;
+        public Game(){
+            this.User = new Player();
+        }
         public Game(Player User, Player Computer, List<Round> RoundHistory){
             this.User = User;
             this.Computer = Computer;
