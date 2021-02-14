@@ -4,7 +4,12 @@ namespace WarCardGame.Models
 {
     public class Round
     {
-        public Card PlayerCard { get; set; }
+        public Card UserCard { get; set; }
         public Card ComputerCard { get; set; }
+        
+        public Round(Card UserCard, Card ComputerCard){
+            this.UserCard = UserCard;
+            this.ComputerCard = ComputerCard;
+        }
     }
 }
