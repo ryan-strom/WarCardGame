@@ -12,6 +12,14 @@ namespace WarCardGame.Models
         }
 
         //  <summary>
+        //  Pops Card Stack to return drawn Card
+        //  </summary>
+        //  <param>None</param>
+        //  <returns>An instance of the <see cref="Card"/> class representing the card that was drawn</returns>
+        public Card DrawCard(){ 
+            return Cards.Pop();
+        }
+        //  <summary>
         //  -Initializes the Cards property to be a colleciton with a length of the amount of Suits given times the amount of cards per Suit
         //  -Adds each card of each suit to cards property
         //  </summary>
