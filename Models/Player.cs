@@ -7,10 +7,16 @@ namespace WarCardGame.Models
         public string Name { get; set; }
         public PlayingDeck PlayingDeck { get; }
         public PlayedDeck PlayedDeck { get; }
-        public Player(string Name){
+        public Player(string Name, PlayingDeck PlayingDeck){
             this.Name = Name;
-            this.PlayingDeck = new PlayingDeck();
+            this.PlayingDeck = PlayingDeck;
             this.PlayedDeck = new PlayedDeck();
+        }
+
+        public Player(string Name, PlayingDeck PlayingDeck, PlayedDeck PlayedDeck){
+            this.Name = Name;
+            this.PlayingDeck = this.PlayingDeck;
+            this.PlayedDeck = this.PlayedDeck;
         }
 
         //  <summary>

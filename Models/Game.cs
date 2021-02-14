@@ -10,8 +10,10 @@ namespace WarCardGame.Models
         public List<Round> RoundHistory { get; set; }
         private readonly int DrawStakesCount = 3;
         public Game(){
-            this.User = new Player("User");
-            this.Computer = new Player("Computer");
+            PlayingDeck gameDeck = new PlayingDeck();
+            List<PlayingDeck> playingDecks = gameDeck.SplitDeck(2);
+            this.User = new Player("User", playingDecks[0]);
+            this.Computer = new Player("Computer", playingDecks[1]);
             this.RoundHistory = new List<Round>();
         }
         public Game(Player User, Player Computer, List<Round> RoundHistory){
@@ -28,11 +30,11 @@ namespace WarCardGame.Models
         //  <returns>None</returns>
         public void Play(){
             Console.WriteLine("Draw card (y/n)? ");
-            string input = Console.ReadLine();
+            string input = "y";
             while(User.PlayingDeck.Cards.Any() && Computer.PlayingDeck.Cards.Any() &&  input == "y"){
                 StartRound();
                 Console.WriteLine("Draw card (y/n)? ");
-                input = Console.ReadLine();
+                input = "y";
             }
             if(User.BothDecksEmpty()){
                 Console.WriteLine("{0} has no more cards. {1} wins!", User.Name, Computer.Name);

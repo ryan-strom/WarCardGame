@@ -10,8 +10,30 @@ namespace WarCardGame.Models
             this.SetCards();
             this.ShuffleCards();
         }
-        
 
+        private PlayingDeck(Stack<Card> Cards){
+            this.Cards = Cards;
+        }
+        
+        //  <summary>
+        //  Splits current deck into provided integer given by paramater
+        //  </summary>
+        // <param name="NumberOfDecks"> <see cref="UInt32"/> Number of decks to split into</param>
+        //  <exception>Exception if NumberOfDecks parameter is less than 0</exception>
+        //  <returns>A List of the <see cref="PlayingCard"/> class..</returns>
+        public List<PlayingDeck> SplitDeck(uint NumberOfDecks){
+            if(NumberOfDecks == 0){
+                throw new Exception("NumberOfDecks cannot be zero");
+            }
+
+            List<PlayingDeck> playingDecks = new List<PlayingDeck>();
+            for(int i = 0; i<Cards.Count; i+=(int)(Cards.Count/NumberOfDecks)){
+                Stack<Card> cards = new Stack<Card>(Cards.Skip(i).Take((int)(Cards.Count/NumberOfDecks)));
+                PlayingDeck playingDeck = new PlayingDeck(cards);
+                playingDecks.Add(playingDeck);
+            }
+            return playingDecks;
+        }
         //  <summary>
         //  Pops Card Stack to return drawn Card
         //  </summary>
