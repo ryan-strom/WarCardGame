@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Newtonsoft.Json;
-namespace WarCardGame.Models
+namespace WarCardGame.Classes
 {
     public class Player
     {

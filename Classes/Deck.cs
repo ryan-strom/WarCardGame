@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using WarCardGame.Interfaces;
 
-namespace WarCardGame.Models
+namespace WarCardGame.Classes
 {
     public abstract class Deck : IDeck<Card>
     {

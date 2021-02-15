@@ -1,7 +1,8 @@
 using System;
-
 using Newtonsoft.Json;
-namespace WarCardGame.Models
+using WarCardGame.Enums;
+
+namespace WarCardGame.Classes
 {
     public class Card
     {

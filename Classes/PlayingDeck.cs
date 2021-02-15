@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using WarCardGame.Enums;
 
-namespace WarCardGame.Models
+namespace WarCardGame.Classes
 {
     public class PlayingDeck : Deck
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WarCardGame.Models
+namespace WarCardGame.Classes
 {
     public class Round
     {

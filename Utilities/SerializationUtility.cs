@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
-namespace WarCardGame.Models
+namespace WarCardGame.Utilities
 {
     public class SerializationUtility<T>
     {

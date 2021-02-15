@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-namespace WarCardGame.Models
+namespace WarCardGame.Interfaces
 {
     public interface IDeck<T>
     {

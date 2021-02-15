@@ -1,5 +1,5 @@
 ﻿using System;
-using WarCardGame.Models;
+using WarCardGame.Classes;
 using System.Diagnostics;
 using System.Linq;
 namespace WarCardGame

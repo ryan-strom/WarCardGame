@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
-namespace WarCardGame.Models
+namespace WarCardGame.Classes
 {
     public class Game
     {

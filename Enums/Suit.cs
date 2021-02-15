@@ -1,4 +1,4 @@
-namespace WarCardGame.Models
+namespace WarCardGame.Enums
 {
     public enum Suit
     {

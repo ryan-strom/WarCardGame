@@ -1,4 +1,4 @@
-namespace WarCardGame.Models
+namespace WarCardGame.Interfaces
 {
     public interface Menu<T>
     {

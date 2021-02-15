@@ -1,6 +1,10 @@
 using System;
 using System.Linq;
-namespace WarCardGame.Models
+using WarCardGame.Enums;
+using WarCardGame.Interfaces;
+using WarCardGame.Utilities;
+
+namespace WarCardGame.Classes
 {
     public class InGameMenu : Menu<InGameMenuOption>
     {

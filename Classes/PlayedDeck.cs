@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-namespace WarCardGame.Models
+namespace WarCardGame.Classes
 {
     public class PlayedDeck : Deck
     {
